@@ -7,6 +7,7 @@ import 'dart:core';
 import 'package:health_care/Helper/imagepicker.dart';
 import 'package:health_care/Helper/text_reader.dart';
 import 'package:health_care/Helper/imageUploader.dart';
+import 'package:health_care/Pages/reports.dart';
 import 'package:health_care/utilities/utils.dart' as urls;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -28,10 +29,6 @@ class _UploadState extends State<Upload> {
   bool isLoading = false;
 
   var post;
-  final spinkit = SpinKitRotatingCircle(
-    color: Colors.white,
-    size: 50.0,
-  );
 
   Future pickImage() async {
     var tempStore = await imageHelper.pickImage();
@@ -133,6 +130,9 @@ class _UploadState extends State<Upload> {
                     ),
                   ),
                   onTap: () async {
+                    setState(() {
+                      isLoading = true;
+                    });
                     await imageUploadHelper(pickedImage);
                     if (isError == true) {
                       showDialog(
@@ -189,12 +189,16 @@ class _UploadState extends State<Upload> {
                             );
                           });
                     } else {
-                      setState(() {
-                        isLoading = true;
-                      });
                       await imageUploadHelperJSON(url)
                           .then((value) => this.setState(() {
                                 this.isLoading = false;
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Reports(
+                                        userId: widget.userId,
+                                      ),
+                                    ));
                               }));
                     }
                   },
@@ -204,9 +208,12 @@ class _UploadState extends State<Upload> {
       ),
       isLoading
           ? SafeArea(
+              child: Container(
+              color: Colors.black12,
               child: Center(
                   child: SpinKitWave(
-                      color: Colors.black, type: SpinKitWaveType.start)))
+                      color: Colors.black, type: SpinKitWaveType.start)),
+            ))
           : SizedBox(),
     ]));
   }
