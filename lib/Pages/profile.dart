@@ -1,15 +1,16 @@
-
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class Profile extends StatefulWidget {
+  Profile({Key key, this.user}) : super(key: key);
+
+  final FirebaseUser user;
   @override
   _ProfileState createState() => _ProfileState();
 }
 
-class _ProfileState extends State<Profile>
-    with SingleTickerProviderStateMixin {
+class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
 
@@ -38,11 +39,6 @@ class _ProfileState extends State<Profile>
                         child: new Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            new Icon(
-                              Icons.arrow_back_ios,
-                              color: Colors.black,
-                              size: 22.0,
-                            ),
                             Padding(
                               padding: EdgeInsets.only(left: 25.0),
                               child: new Text('PROFILE',
@@ -54,7 +50,6 @@ class _ProfileState extends State<Profile>
                             )
                           ],
                         )),
-                      
                     Padding(
                       padding: EdgeInsets.only(top: 20.0),
                       child: new Stack(fit: StackFit.loose, children: <Widget>[
@@ -63,9 +58,10 @@ class _ProfileState extends State<Profile>
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             new Container(
-                                width: 140.0,
-                                height: 140.0,
-                                child: Image.asset("assests/images/pic.png"),)
+                              width: 140.0,
+                              height: 140.0,
+                              child: Image.network(widget.user.photoUrl),
+                            )
                           ],
                         ),
                         Padding(
@@ -94,7 +90,6 @@ class _ProfileState extends State<Profile>
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 25.0),
                     child: new Column(
-                      
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         Padding(
@@ -136,7 +131,7 @@ class _ProfileState extends State<Profile>
                                   mainAxisSize: MainAxisSize.min,
                                   children: <Widget>[
                                     new Text(
-                                      'Name   :   Rahul',
+                                      'Name   :   ${widget.user.displayName}',
                                       style: TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.bold),
@@ -177,7 +172,7 @@ class _ProfileState extends State<Profile>
                                     mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
                                       new Text(
-                                        'Email ID:    abc@gmail.com',
+                                        'Email ID:    ${widget.user.email}',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.bold),
@@ -213,7 +208,7 @@ class _ProfileState extends State<Profile>
                                   mainAxisSize: MainAxisSize.min,
                                   children: <Widget>[
                                     new Text(
-                                      'Mobile :   9785236420',
+                                      'Mobile :   ${widget.user.phoneNumber}',
                                       style: TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.bold),
@@ -352,10 +347,10 @@ class _ProfileState extends State<Profile>
                                   children: <Widget>[
                                     Center(
                                       child: new Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
                                         mainAxisSize: MainAxisSize.min,
                                         children: <Widget>[
-                                          
                                           new Text(
                                             'State  :   Tamil Nadu',
                                             style: TextStyle(
@@ -389,8 +384,6 @@ class _ProfileState extends State<Profile>
                         //         ),
                         //       ],
                         //     )),
-    
-
                       ],
                     ),
                   ),

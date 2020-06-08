@@ -26,9 +26,12 @@ class _SignInState extends State<SignIn> {
     // idToken: googleSignInAuthentication.idToken,
     // accessToken: googleSignInAuthentication.accessToken);
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => MyHomePage()),
+        MaterialPageRoute(
+            builder: (context) => MyHomePage(
+                  user: user,
+                )),
         (Route<dynamic> route) => false);
-    print("User is: ${user.providerData}");
+    print("User is: ${user.photoUrl}");
 
     setState(() {
       _imageUrl = user.photoUrl;

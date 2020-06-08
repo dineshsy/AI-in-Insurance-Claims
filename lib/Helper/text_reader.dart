@@ -27,10 +27,11 @@ Future<Map> apiRequest(String s) async {
     'Glucose'
   ];
   List bloodValues = [];
+  print(dataInJSON);
   var ctr = 0;
   for (var i in dataInJSON.values) {
     for (var j = 1; j < i.values.length; j++) {
-      if (ctr == 1) bloodValues.add(i['$j']);
+      if (ctr == 2) bloodValues.add(i['$j']);
     }
     ctr++;
   }
