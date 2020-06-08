@@ -202,7 +202,12 @@ class _UploadState extends State<Upload> {
               : SizedBox()
         ],
       ),
-      isLoading ? spinkit : SizedBox(),
+      isLoading
+          ? SafeArea(
+              child: Center(
+                  child: SpinKitWave(
+                      color: Colors.black, type: SpinKitWaveType.start)))
+          : SizedBox(),
     ]));
   }
 

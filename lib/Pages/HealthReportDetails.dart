@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:health_care/Helper/HealthDataModal.dart';
 
 class HealthReportDetails extends StatelessWidget {
-  HealthReportDetails({Key key, this.healthReport}) : super(key: key);
+  HealthReportDetails({Key key, this.healthReport, this.index})
+      : super(key: key);
 
   final HealthReport healthReport;
+  final int index;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +22,7 @@ class HealthReportDetails extends StatelessWidget {
 
               /// This is the important part, we need [Hero] widget with unique tag but same as Hero's tag in [User] widget.
               child: Hero(
-                tag: "avatar_" + healthReport.key.toString(),
+                tag: "avatar_" + index.toString(),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height / 3,

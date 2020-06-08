@@ -85,8 +85,8 @@ class _ReportsState extends State<Reports> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => HealthReportDetails(
-                                healthReport: _healthReportList[index],
-                              ),
+                                  healthReport: _healthReportList[index],
+                                  index: index),
                             )),
                         child: Container(
                           /// Give nice padding
@@ -95,8 +95,7 @@ class _ReportsState extends State<Reports> {
                             children: <Widget>[
                               /// This is the important part, we need [Hero] widget with unique tag for this item.
                               Hero(
-                                tag: "avatar_" +
-                                    _healthReportList[index].key.toString(),
+                                tag: "avatar_" + index.toString(),
                                 child: CircleAvatar(
                                   radius: 32,
                                   backgroundImage: NetworkImage(
